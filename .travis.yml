@@ -1,3 +1,5 @@
+# travis.yml
+#test
 sudo: required
 
 language: php
@@ -7,11 +9,15 @@ services:
 
 script:
   # Build docker image
+  terraform plan ./terraform
 post_install:
   # Push docker image to Docker Hub
 
 before_deploy:
    # Install terraform
+  - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
+  - unzip terraform_0.8.8_linux_amd64.zip
+  - mv terraform /usr/local/bin/
+  - export PATH="~/bin:$PATH"
 deploy:
    # Deploy using terraform
-

@@ -1,6 +1,4 @@
-
-
-### Variables ##
+### Variables
 variable db_storage {
   default = "20"
 }
