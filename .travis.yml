@@ -1,0 +1,17 @@
+sudo: required
+
+language: php
+
+services:
+   - docker
+
+script:
+  # Build docker image
+post_install:
+  # Push docker image to Docker Hub
+
+before_deploy:
+   # Install terraform
+deploy:
+   # Deploy using terraform
+
