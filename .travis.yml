@@ -12,8 +12,8 @@ before_install:
   - unzip /tmp/terraform.zip -d /tmp
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
+  script: terraform init
 script:
-  - terraform init
   - terraform plan
 deploy:
   - provider: script
