@@ -31,7 +31,6 @@ resource "aws_key_pair" "front" {
 data "template_file" "init" {
   template = "${file("init.tpl")}"
 }
-
 resource "aws_instance" "front" {
   # TO DO
   # see https://www.terraform.io/docs/providers/aws/r/instance.html
