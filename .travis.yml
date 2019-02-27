@@ -25,7 +25,7 @@ before_install:
   - export PATH="~/bin:$PATH"
 
 script:
-  - terraform plan
+  - terraform plan ./terraform
 
 deploy:
    # Deploy using terraform
@@ -33,7 +33,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     skip_cleanup: true
-    script: terraform apply
+    script: terraform apply ./terraform
     on:
       branch: master
 
