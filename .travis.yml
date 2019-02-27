@@ -18,8 +18,8 @@ before_deploy:
 
 script:
   - pwd
-  - terraform init ./terraform
-  - terraform plan ./terraform
+  - sudo terraform init ./terraform
+  - sudo terraform plan ./terraform
 
 
 deploy:
