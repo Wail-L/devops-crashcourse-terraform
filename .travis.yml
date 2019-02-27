@@ -17,11 +17,10 @@ post_install:
 before_install:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
-  - set aws_access_key_id $AWS_ACCESS_KEY
-  - set aws_secret_access_key $AWS_SECRET_KEY
+  - set access_key_id $AWS_ACCESS_KEY
+  - set secret_access_key $AWS_SECRET_KEY
   - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
   - unzip /tmp/terraform.zip -d /tmp
-  #- mkdir ~/bin
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
 
