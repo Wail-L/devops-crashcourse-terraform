@@ -17,7 +17,7 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: terraform destroy
+    script: terraform destroy -auto-approve
     on:
       branch: master
 
