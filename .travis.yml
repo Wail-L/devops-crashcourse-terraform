@@ -17,6 +17,7 @@ before_deploy:
   - cd terraform_0.10.6_linux_amd64
 
 script:
+  - pwd
   - terraform init ./terraform
   - terraform plan ./terraform
 
