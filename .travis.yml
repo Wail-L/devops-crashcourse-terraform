@@ -21,8 +21,9 @@ before_install:
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
 
-script: terraform plan ./terraform
-
+script:
+  - terraform init ./terraform
+  - terraform plan ./terraform
 
 
 deploy:
