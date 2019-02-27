@@ -25,9 +25,9 @@ script:
 
 deploy:
    # Deploy using terraform
-  - provider:
-  script:  terraform apply ./terraform
-  skip_cleanup: true
-  on:
-   branch: master
+  - provider: script
+    skip_cleanup: true
+    script: terraform apply ./terraform
+    on:
+      branch: master
 
