@@ -27,7 +27,7 @@ before_install:
 
 script:
   - terraform init -input=false
-  - terraform plan
+  - terraform plan -out=tfplan -input=false
 
 
 deploy:
@@ -36,7 +36,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     skip_cleanup: true
-    script: terraform apply
+    script: terraform apply -input=false tfplan
     on:
       branch: master
 
