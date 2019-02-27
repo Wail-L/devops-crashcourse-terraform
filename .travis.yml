@@ -5,20 +5,15 @@ env:
 services:
    - docker
 post_install:
-before_install:
+
+script:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
   - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
   - unzip /tmp/terraform.zip -d /tmp
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
-  script: terraform init
-script:
+  - terraform init
   - terraform plan
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: terraform destroy -auto-approve
-    on:
-      branch: master
+  - terraform destroy -auto-approve
 
