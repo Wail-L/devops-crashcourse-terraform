@@ -26,8 +26,7 @@ before_install:
   - export PATH="~/bin:$PATH"
 
 script:
-  - terraform init backend
-  - terraform plan -out=tfplan -input=false
+  - terraform plan
 
 
 deploy:
