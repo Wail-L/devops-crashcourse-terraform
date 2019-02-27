@@ -1,19 +1,21 @@
+# travis.yml
 sudo: required
 language: php
-env:
-  - TF_INPUT=false
 services:
-   - docker
-post_install:
-
+  - docker
 script:
-  - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
-  - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
-  - unzip /tmp/terraform.zip -d /tmp
-  - mv /tmp/terraform ~/bin
-  - export PATH="~/bin:$PATH"
+  # Build docker image
+  - wget https://releases.hashicorp.com/terraform/0.10.6/terraform_0.10.6_linux_amd64.zip
+  - unzip terraform_0.10.6_linux_amd64.zip
+  - sudo mv terraform /usr/local/bin/
+  - cd ./devops-crashcourse-terraform
   - terraform init
   - terraform plan
-  - terraform destroy -auto-approve
+  - terraform apply -input=false -auto-approve
+post_install:
+# Push docker image to Docker Hub
 
+before_deploy:
+# Install terraform
+deploy:
+# Deploy using terraform

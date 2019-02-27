@@ -29,12 +29,17 @@ resource "aws_key_pair" "front" {
   public_key = "${var.public_key}"
 }
 
+data "template_file" "init" {
+  template = "${file("init.tpl")}"
+}
+
 resource "aws_instance" "front" {
   # TO DO
   # see https://www.terraform.io/docs/providers/aws/r/instance.html
   ami           = "${var.front_ami}"
   instance_type = "t2.micro"
-  key_name = "custom-crashcourse-front"
+  key_name = "devops-crashcourses-front"
+  user_data = "${data.template_file.init.rendered}"
 }
 
 resource "aws_elb" "front" {
@@ -62,7 +67,6 @@ resource "aws_elb" "front" {
   connection_draining         = true
   connection_draining_timeout = 400
 }
-
 
 
 ### Outputs

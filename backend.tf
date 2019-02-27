@@ -24,6 +24,14 @@ variable db_snapshot {
   default = "arn:aws:rds:eu-west-1:159571505100:snapshot:attendeelist"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "terraform-test00"
+    key    = "terraform.tfstate"
+    region = "eu-west-1"
+  }
+}
+
 ### Resources
 resource "aws_db_subnet_group" "mysql" {
   # TO DO
@@ -41,13 +49,6 @@ resource "aws_db_instance" "mysql" {
   skip_final_snapshot = true
 }
 
-terraform {
-  backend "s3" {
-    bucket = "terraform-test00"
-    key    = "terraform.tfstate"
-    region = "eu-west-1"
-  }
-}
 
 ### Outputs
 output "mysql_host" {
