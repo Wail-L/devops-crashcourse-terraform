@@ -1,25 +1,30 @@
 # travis.yml
 #test
-sudo: required
+sudo: false
 
 language: php
-
+env:
+  # This environment variable tells Terraform not to prompt for input. This is
+  # not required, but if we make a mistake, the Travis builder will hang waiting
+  # for user input, tieing up unnecessary resources.
+  - TF_INPUT=false
 services:
    - docker
 
 post_install:
   # Push docker image to Docker Hub
 
-before_deploy:
-   # Install terraform§§
-  - wget https://releases.hashicorp.com/terraform/0.10.6/terraform_0.10.6_linux_amd64.zip
-  - unzip terraform_0.10.6_linux_amd64.zip
-  - cd terraform_0.10.6_linux_amd64
+before_install:
+  - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
+  - unzip /tmp/terraform.zip -d /tmp
+  - mkdir ~/bin
+  - mv /tmp/terraform ~/bin
+  - export PATH="~/bin:$PATH"
 
 script:
   - pwd
-  - sudo terraform init ./terraform
-  - sudo terraform plan ./terraform
+  - terraform init ./terraform
+  - terraform plan ./terraform
 
 
 deploy:
