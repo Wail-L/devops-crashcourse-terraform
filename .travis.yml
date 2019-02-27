@@ -17,8 +17,8 @@ post_install:
 before_install:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
-  #- aws configure set aws_access_key_id $AWS_ACCESS_KEY
-  #- aws configure set aws_secret_access_key $AWS_SECRET_KEY
+  - set aws_access_key_id $AWS_ACCESS_KEY
+  - set aws_secret_access_key $AWS_SECRET_KEY
   - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
   - unzip /tmp/terraform.zip -d /tmp
   #- mkdir ~/bin
@@ -34,7 +34,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     skip_cleanup: true
-    script: terraform apply 
+    script: terraform apply
     on:
       branch: master
 
