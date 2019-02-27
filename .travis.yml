@@ -19,11 +19,14 @@ before_deploy:
   - unzip terraform_0.8.8_linux_amd64.zip
   - mv terraform /usr/local/bin/
   - export PATH="~/bin:$PATH"
+  - terraform init
+  - terraform plan
 deploy:
    # Deploy using terraform
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: "terraform-test00"
+provider: script
+  script:
+  - terraform apply
   skip_cleanup: true
-  region: eu-west-1
+  on:
+   branch: master
+
