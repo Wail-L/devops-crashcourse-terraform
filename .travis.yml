@@ -28,14 +28,13 @@ before_install:
 script:
   - terraform plan
 
-
 deploy:
    # Deploy using terraform
   - provider: script
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     skip_cleanup: true
-    script: terraform apply -input=false tfplan
+    script: terraform apply 
     on:
       branch: master
 
