@@ -12,7 +12,7 @@ variable front_instance_type {
 }
 
 variable public_key {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAhdHQ0kt282Fbq3lX507dtMToaoFzYvdqeRbRP4Rb0HPQDXjQBRHqwYY46P8x1PirokkLuz8ujGHs9YGl+n2djIcNfty/KKaa76SmVILroCz/6i0S8ucHND4lp++Oa9WcXNaB0StobP7k6/MCIqsPSX93aHHSxj1RACB7Su9QV2gjR4okg55HjUsrby3fuyzAh1r2HhdALtQyj1wNNvRIXnlqscFC1JOYJ2+NB8NHxijCLguehnit9ckzUztHCNT532HWWjn5/vEExePNdV10Jr0FExOK5qtRhVOmotV8VlmcZLPm7V39TxSe6Bligoc0ene74mFRg/BciRHIudfdDw== rsa-key-20190225"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJ6RTIUF2qIudJuRiyznZp4U7YUcMCTygJxMXQKCICT5ir+sLxwtQNvTfd1LVz3RLMYNx768SlikhtO/9eFzjf/rpHs2RwDoaW8vyTg41Hsmc9GJ7klNkUsiO7MhgsO8AEkStTOaHqH6zLUA7FTG3m4FbY74/U8MdMTwQih97CLKJgItmH7wy0mRoWwQnxUth7wP8iaN9aJcEWn5DbhIK1W91Kjr86uFbN9xf5jOval1Qzd7UlBcwV4wEm2VKWSyuiiR0+Qgo82gOi2QXMCk/GUkGzeVK6gWZgasQlUgiRSeVvqVf3El+wayK7I8eH0SDJlaGUQrFInbgxlAfo98Rp imported-openssh-key"
 }
 
 variable front_elb_port {
@@ -29,17 +29,12 @@ resource "aws_key_pair" "front" {
   public_key = "${var.public_key}"
 }
 
-data "template_file" "init" {
-  template = "${file("init.tpl")}"
-}
-
 resource "aws_instance" "front" {
   # TO DO
   # see https://www.terraform.io/docs/providers/aws/r/instance.html
   ami           = "${var.front_ami}"
   instance_type = "t2.micro"
-  key_name = "devops-crashcourses-front"
-  user_data = "${data.template_file.init.rendered}"
+  key_name = "custom-crashcourse-front"
 }
 
 resource "aws_elb" "front" {
@@ -67,6 +62,7 @@ resource "aws_elb" "front" {
   connection_draining         = true
   connection_draining_timeout = 400
 }
+
 
 
 ### Outputs

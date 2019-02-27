@@ -41,6 +41,13 @@ resource "aws_db_instance" "mysql" {
   skip_final_snapshot = true
 }
 
+terraform {
+  backend "s3" {
+    bucket = "terraform-test00"
+    key    = "terraform.tfstate"
+    region = "eu-west-1"
+  }
+}
 
 ### Outputs
 output "mysql_host" {
