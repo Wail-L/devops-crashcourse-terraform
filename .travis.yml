@@ -20,8 +20,9 @@ before_deploy:
 
 
 script:
-  - terraform plan ./terraform
   - terraform init ./terraform
+  - terraform plan ./terraform
+  
 
 deploy:
    # Deploy using terraform
