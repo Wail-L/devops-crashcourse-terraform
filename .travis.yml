@@ -12,23 +12,21 @@ post_install:
 
 before_deploy:
    # Install terraform§§
-  - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
-  - unzip /tmp/terraform.zip -d /tmp
-  - mkdir ~/bin
-  - mv /tmp/terraform ~/bin
-  - export PATH="~/bin:$PATH"
+    - wget https://releases.hashicorp.com/terraform/0.10.6/terraform_0.10.6_linux_amd64.zip
+    - unzip terraform_0.10.6_linux_amd64.zip
 
 
 script:
-  - terraform init ./terraform
-  - terraform plan ./terraform
-  
+  - ./terraform init
+  - ./terraform plan
 
 deploy:
    # Deploy using terraform
   - provider: script
     skip_cleanup: true
-    script: terraform apply ./terraform
+    script: ./terraform apply
     on:
       branch: master
+
+
 
