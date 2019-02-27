@@ -12,21 +12,20 @@ post_install:
 
 before_deploy:
    # Install terraform§§
-    - wget https://releases.hashicorp.com/terraform/0.10.6/terraform_0.10.6_linux_amd64.zip
-    - unzip terraform_0.10.6_linux_amd64.zip
-
+  - wget https://releases.hashicorp.com/terraform/0.10.6/terraform_0.10.6_linux_amd64.zip
+  - unzip terraform_0.10.6_linux_amd64.zip
+  - cd terraform_0.10.6_linux_amd64
 
 script:
-  - ./terraform init
-  - ./terraform plan
+  - terraform init ./terraform
+  - terraform plan ./terraform
+
 
 deploy:
    # Deploy using terraform
   - provider: script
     skip_cleanup: true
-    script: ./terraform apply
+    script: terraform apply ./terraform
     on:
       branch: master
-
-
 
