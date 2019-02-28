@@ -13,7 +13,12 @@ script:
   - terraform apply -auto-approve
 post_install:
 # Push docker image to Docker Hub
-
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push waill/tp-42:tagname
+    fi
+  - docker pull waill/tp-42
 before_deploy:
 # Install terraform
 deploy:
