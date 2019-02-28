@@ -11,6 +11,7 @@ script:
   - terraform init
   - terraform plan
   - terraform apply -auto-approve
+    
 post_install:
 # Push docker image to Docker Hub
 after_success:
