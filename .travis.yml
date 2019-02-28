@@ -14,6 +14,7 @@ script:
 post_install:
 # Push docker image to Docker Hub
 
+
 before_deploy:
 # Install terraform
 deploy:
