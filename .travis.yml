@@ -14,9 +14,13 @@ script:
 post_install:
 # Push docker image to Docker Hub
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; docker push waill/tp-42:tagname fi
-  - docker pull waill/tp-42
+  #- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; docker push waill/tp-42:tagname fi
+  #- docker pull waill/tp-42
 before_deploy:
 # Install terraform
 deploy:
+  provider: script
+  script: bash docker_push
+  on:
+     branch: master
 # Deploy using terraform
